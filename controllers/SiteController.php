@@ -16,19 +16,20 @@ class SiteController {
 
         // Procesar formulario si es la sección contacto y viene por POST
         if ($url === 'contacto' && $_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nombre'])) {
-            $nombre_contacto = trim($_POST['nombre']);
+            // CAMBIO: ahora se leen también el correo y el comentario
+            $nombre = trim($_POST['nombre']);
+            $correo = trim($_POST['correo'] ?? '');
+            $comentario = trim($_POST['comentario'] ?? '');
 
-            if (!empty($nombre_contacto)) {
+            if ($nombre !== '' && filter_var($correo, FILTER_VALIDATE_EMAIL) && $comentario !== '') {
                 $modelo = new ContactoModel($this->conexion);
-                $exito = $modelo->guardarContacto($nombre_contacto);
-
-                if ($exito) {
-                    $mensaje_db = "<p style='color: green; font-weight: bold;'>¡Mensaje guardado con éxito en la Base de Datos!</p>";
+                if ($modelo->guardarContacto($nombre, $correo, $comentario)) {
+                    $mensaje_db = "<p class='alerta ok'>¡Mensaje guardado con éxito en la base de datos!</p>";
                 } else {
-                    $mensaje_db = "<p style='color: red;'>Error al guardar en la base de datos.</p>";
+                    $mensaje_db = "<p class='alerta error'>Error al guardar en la base de datos.</p>";
                 }
             } else {
-                $mensaje_db = "<p style='color: red;'>Por favor, escribe un nombre válido.</p>";
+                $mensaje_db = "<p class='alerta error'>Completa nombre, un correo válido y un comentario.</p>";
             }
         }
 
@@ -41,6 +42,10 @@ class SiteController {
                 break;
             case 'servicios':
                 require_once 'views/servicios.php';
+                break;
+            // CAMBIO: nueva sección de gustos personales
+            case 'gustos':
+                require_once 'views/gustos.php';
                 break;
             case 'contacto':
                 require_once 'views/contacto.php';

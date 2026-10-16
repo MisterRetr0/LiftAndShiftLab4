@@ -1,10 +1,17 @@
-<h2>Página de Contacto</h2>
+<h2>Contacto</h2>
+<p>Déjanos tus datos y te responderemos pronto.</p>
 
-<!-- El controlador inyecta esta variable aquí si existe un mensaje -->
 <?php echo $mensaje_db; ?>
 
 <form action="" method="POST">
-    <label for="nombre">Tu Nombre: </label><br>
-    <input type="text" id="nombre" name="nombre" required><br><br>
-    <button type="submit">Enviar Mensaje</button>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="correo">Correo</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="comentario">Comentario</label>
+    <textarea id="comentario" name="comentario" rows="5" required></textarea>
+
+    <button type="submit">Enviar mensaje</button>
 </form>
