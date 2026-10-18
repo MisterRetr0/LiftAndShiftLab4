@@ -34,3 +34,12 @@ docker compose up --build
 | `assets/css/estilos.css` | Nuevo estilo (liquid glass) |
 
 Nota: se usa el puerto 8067 porque el 8080 estaba ocupado en mi equipo.
+
+## Uso de Claude
+
+Usé Claude (asistente de IA de Anthropic) como apoyo en dos cosas:
+
+- **Comandos:** me recordó comandos básicos de Docker.
+- **Interfaz:** me ayudó con detalles pequeños del diseño.
+
+El resto del laboratorio lo hice yo.
